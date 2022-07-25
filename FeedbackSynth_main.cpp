@@ -2,8 +2,6 @@
 #include "FeedbackSynthEngine.h"
 #include "FeedbackSynthControls.h"
 
-// TODO: This is just a placeholder file until the engine code is developed
-
 using namespace infrasonic;
 using namespace daisy;
 using namespace daisysp;
@@ -14,8 +12,6 @@ static const size_t kBlockSize = 4;
 static DaisySeed hw;
 static FeedbackSynth::Engine engine;
 static FeedbackSynth::Controls controls;
-
-// --- /TODO ---
 
 void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, size_t size)
 {
