@@ -5,6 +5,7 @@
 #include "memory/sdram_alloc.h"
 #endif
 
+using namespace infrasonic;
 using namespace infrasonic::FeedbackSynth;
 using namespace daisysp;
 
@@ -28,9 +29,9 @@ void Engine::Init(const float sample_rate)
     for (unsigned int i=0; i<2; i++) {
 
         strings_[i].Init(sample_rate);
-        strings_[i].SetBrightness(0.85f);
+        strings_[i].SetBrightness(0.9f);
         strings_[i].SetFreq(mtof(40.0f));
-        strings_[i].SetDamping(0.5f);
+        strings_[i].SetDamping(0.2f);
 
         fb_delayline_[i].Init();
 
@@ -107,7 +108,7 @@ void Engine::Process(float &outL, float &outR)
     // ---> Feedback Loop
 
     // Get noise + feedback output
-    inL = fb_delayline_[0].Read(fb_delay_samp_) + noise_samp; 
+    inL = fb_delayline_[0].Read(fb_delay_samp_) + noise_samp;
     inR = fb_delayline_[1].Read(daisysp::fmax(1.0f, fb_delay_samp_ - 4.f)) + noise_samp;
 
     // Process through KS resonator
@@ -116,8 +117,8 @@ void Engine::Process(float &outL, float &outR)
 
     // Distort + Clip
     // TODO: Oversample this? Another distortion algo maybe?
-    sampL = SoftClip(sampL * 4.0f);
-    sampR = SoftClip(sampR * 4.0f);
+    sampL = SoftClip(sampL * 8.0f);
+    sampR = SoftClip(sampR * 8.0f);
 
     // Filter in feedback loop
     fb_lpf_.ProcessStereo(sampL, sampR);
