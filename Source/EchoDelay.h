@@ -9,11 +9,11 @@
 namespace infrasonic {
 
 /**
- * @brief 
+ * @brief
  * Tape-ish echo delay.
- *   - Feedback is unbounded, but signal is soft-clipped 
+ *   - Feedback is unbounded, but signal is soft-clipped
  *   - Output is full-wet, should be mixed with dry signal externally
- * 
+ *
  * @tparam MaxLength Max length of delay in samples
  */
 template<size_t MaxLength>
@@ -33,7 +33,7 @@ class EchoDelay {
         }
 
         /**
-         * @brief Set the approximate lag time (smoothing) for delay time changes, in seconds 
+         * @brief Set the approximate lag time (smoothing) for delay time changes, in seconds
          */
         void SetLagTime(const float time_s)
         {
@@ -41,8 +41,8 @@ class EchoDelay {
         }
 
         /**
-         * @brief Set the Delay Time in seconds 
-         * 
+         * @brief Set the Delay Time in seconds
+         *
          * @param time_s Delay time in seconds. Will be truncated to MaxLength.
          * @param immediately If true, sets delay time immediately with no smoothing.
          */
@@ -56,10 +56,10 @@ class EchoDelay {
          * @brief
          * Set the feedback amount (linear multiplier).
          * This can be >1 in magnitude for saturated swells, or negative.
-         * 
+         *
          * NOTE: This is not internally smoothed. Use external smoothing if desired.
-         * 
-         * @param feedback 
+         *
+         * @param feedback
          */
         void SetFeedback(const float feedback)
         {
