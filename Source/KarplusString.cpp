@@ -26,6 +26,7 @@ void KarplusString::Reset()
 {
     string_.Reset();
     iir_damping_filter_.Init(sample_rate_);
+    iir_damping_filter_.SetFreq(8000.0f);
 
     dc_blocker_.Init(sample_rate_);
 
@@ -73,10 +74,10 @@ float KarplusString::ProcessInternal(const float in)
         src_ratio  = 1.0f;
     }
 
-    float damping_cutoff
-        = fmin(12.0f + damping_ * damping_ * 60.0f + brightness * 24.0f, 84.0f);
-    float damping_f
-        = fmin(frequency_ * powf(2.f, damping_cutoff * daisysp::kOneTwelfth), 0.499f);
+    // float damping_cutoff
+        // = fmin(12.0f + damping_ * damping_ * 60.0f + brightness * 24.0f, 84.0f);
+    // float damping_f
+        // = fmin(frequency_ * powf(2.f, damping_cutoff * daisysp::kOneTwelfth), 0.499f);
 
     // Crossfade to infinite decay.
     // if(damping_ >= 0.95f)
@@ -87,23 +88,24 @@ float KarplusString::ProcessInternal(const float in)
     //     damping_cutoff += to_infinite * (128.0f - damping_cutoff);
     // }
 
-    float temp_f = damping_f * sample_rate_;
-    iir_damping_filter_.SetFreq(temp_f);
+    // float temp_f = damping_f * sample_rate_;
+    // iir_damping_filter_.SetFreq(temp_f);
 
-    float ratio                = powf(2.f, damping_cutoff * daisysp::kOneTwelfth);
-    float damping_compensation = 1.f - 2.f * atanf(1.f / ratio) / (TWOPI_F);
+    // float ratio                = powf(2.f, damping_cutoff * daisysp::kOneTwelfth);
+    // float damping_compensation = 1.f - 2.f * atanf(1.f / ratio) / (TWOPI_F);
 
     src_phase_ += src_ratio;
     if(src_phase_ > 1.0f)
     {
         float s = 0.0f;
         src_phase_ -= 1.0f;
-        delay   = delay * damping_compensation;
+        // delay   = delay * damping_compensation;
         s = string_.ReadHermite(delay);
         s += in;
         s = daisysp::fclamp(s, -20.f, +20.f);
 
         s = dc_blocker_.Process(s);
+        s *= 0.8f;
 
         s = iir_damping_filter_.Process(s);
         string_.Write(s);
