@@ -39,6 +39,9 @@ void Engine::Init(const float sample_rate)
         echo_delay_[i]->SetDelayTime(5.0f, true);
         echo_delay_[i]->SetFeedback(0.5f);
         echo_delay_[i]->SetLagTime(0.5f);
+
+        overdrive_[i].Init();
+        overdrive_[i].SetDrive(0.4);
     }
 
     fb_lpf_.Init(sample_rate);
@@ -117,8 +120,10 @@ void Engine::Process(float in, float &outL, float &outR)
 
     // Distort + Clip
     // TODO: Oversample this? Another distortion algo maybe?
-    sampL = SoftClip(sampL * 8.0f);
-    sampR = SoftClip(sampR * 8.0f);
+    // sampL = SoftClip(sampL * 8.0f);
+    // sampR = SoftClip(sampR * 8.0f);
+    sampL = overdrive_[0].Process(sampL);
+    sampR = overdrive_[1].Process(sampR);
 
     // Filter in feedback loop
     fb_lpf_.ProcessStereo(sampL, sampR);

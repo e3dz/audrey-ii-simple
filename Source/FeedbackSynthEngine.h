@@ -54,6 +54,7 @@ class Engine {
         infrasonic::KarplusString strings_[2];
         daisysp::WhiteNoise noise_;
         daisysp::DelayLine<float, kMaxFeedbackDelaySamp> fb_delayline_[2];
+        daisysp::Overdrive overdrive_[2];
 
         LPF12 fb_lpf_;
         HPF12 fb_hpf_;
