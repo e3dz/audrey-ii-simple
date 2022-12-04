@@ -29,9 +29,9 @@ void Engine::Init(const float sample_rate)
     for (unsigned int i=0; i<2; i++) {
 
         strings_[i].Init(sample_rate);
-        strings_[i].SetBrightness(0.9f);
+        strings_[i].SetBrightness(0.98f);
         strings_[i].SetFreq(mtof(40.0f));
-        strings_[i].SetDamping(0.2f);
+        strings_[i].SetDamping(0.4f);
 
         fb_delayline_[i].Init();
 
@@ -94,7 +94,7 @@ void Engine::SetEchoDelaySendAmount(const float echo_send)
     echo_send_ = echo_send;
 }
 
-void Engine::Process(float &outL, float &outR)
+void Engine::Process(float in, float &outL, float &outR)
 {
     // --- Update audio-rate-smoothed control params ---
 
@@ -108,8 +108,8 @@ void Engine::Process(float &outL, float &outR)
     // ---> Feedback Loop
 
     // Get noise + feedback output
-    inL = fb_delayline_[0].Read(fb_delay_samp_) + noise_samp;
-    inR = fb_delayline_[1].Read(daisysp::fmax(1.0f, fb_delay_samp_ - 4.f)) + noise_samp;
+    inL = fb_delayline_[0].Read(fb_delay_samp_) + noise_samp + in;
+    inR = fb_delayline_[1].Read(daisysp::fmax(1.0f, fb_delay_samp_ - 4.f)) + noise_samp + in;
 
     // Process through KS resonator
     sampL = strings_[0].Process(inL);

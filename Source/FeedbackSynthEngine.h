@@ -35,7 +35,7 @@ class Engine {
         void SetEchoDelayFeedback(const float echo_fb);
         void SetEchoDelaySendAmount(const float echo_send);
 
-        void Process(float &outL, float &outR);
+        void Process(float in, float &outL, float &outR);
 
     private:
         // long enough for 250ms at 48kHz

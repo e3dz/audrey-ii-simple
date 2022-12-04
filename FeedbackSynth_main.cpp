@@ -1,4 +1,4 @@
-#include <daisy_seed.h> 
+#include <daisy_seed.h>
 #include "FeedbackSynthEngine.h"
 #include "FeedbackSynthControls.h"
 
@@ -17,7 +17,7 @@ void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, s
 {
     controls.Process();
     for (size_t i=0; i<size; i++) {
-        engine.Process(OUT_L[i], OUT_R[i]);
+        engine.Process(IN_L[i], OUT_L[i], OUT_R[i]);
     }
 }
 
