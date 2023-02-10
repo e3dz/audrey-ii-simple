@@ -57,7 +57,7 @@ void KarplusString::SetDamping(float damping)
 
 float KarplusString::ProcessInternal(const float in)
 {
-    float brightness = brightness_;
+    // float brightness = brightness_;
 
     float delay = 1.0f / frequency_;
     delay       = daisysp::fclamp(delay, 4.f, kDelayLineSize - 4.0f);

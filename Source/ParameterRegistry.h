@@ -11,14 +11,14 @@
 namespace infrasonic {
 
 /**
- * @brief 
+ * @brief
  * Generic control parameter registry with built in update smoothing
- * 
+ *
  * @tparam ParamId Template parameter specifying the parameter ID type
  */
 template<typename ParamId>
 class ParameterRegistry {
-    
+
     public:
 
         using Handler = std::function<void(const float)>;
@@ -31,8 +31,8 @@ class ParameterRegistry {
             control_rate_ = control_rate;
         }
 
-        void Register(const ParamId id, const float initial_value, const float min, const float max, 
-                      Handler handler, const float smooth_time = 0.05f, 
+        void Register(const ParamId id, const float initial_value, const float min, const float max,
+                      Handler handler, const float smooth_time = 0.05f,
                       const daisysp::Mapping mapping = daisysp::Mapping::LINEAR)
         {
             const float coef = onepole_coef_t60(smooth_time, control_rate_);
@@ -69,21 +69,21 @@ class ParameterRegistry {
                 state.handler(state.value.get());
             }
         }
-    
+
     private:
 
         static constexpr float kParamSmoothingThresh = 0.001f;
 
         struct ParamState {
             SmoothedValue value;
-            
+
             const float min;
             const float max;
             const daisysp::Mapping mapping;
             const Handler handler;
 
             ParamState() = delete;
-            ParamState(const float initial, const float min, const float max, 
+            ParamState(const float initial, const float min, const float max,
                        const float coef, const daisysp::Mapping mapping, const Handler handler)
                 : value(initial, coef)
                 , min(min)
@@ -94,6 +94,8 @@ class ParameterRegistry {
             }
         };
 
+        // TODO: redo this to use libDaisy Parameter objects and
+        // avoid using STL container
         using ParamStates = std::unordered_map<ParamId, ParamState>;
 
         float control_rate_;
