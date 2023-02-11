@@ -27,15 +27,15 @@ public:
 
 private:
 
-    const size_t kNumAdcChannels = 1;
+    static const     size_t     kNumAdcChannels = 3;
 
-    enum PinNumber : uint8_t {
-        ADC_CH0 = 15,
-        MUX0_ADR0 = 1,
-        MUX0_ADR1 = 2,
-        MUX0_ADR2 = 3
-    };
-        
+    static constexpr daisy::Pin kPotAdcPin1     = daisy::seed::A1;
+    static constexpr daisy::Pin kPotAdcPin2     = daisy::seed::A2;
+    static constexpr daisy::Pin kMuxAdcPin      = daisy::seed::A0;
+    static constexpr daisy::Pin kMuxAddrPin0    = daisy::seed::D1;
+    static constexpr daisy::Pin kMuxAddrPin1    = daisy::seed::D2;
+    static constexpr daisy::Pin kMuxAddrPin2    = daisy::seed::D3;
+
     /// Identifies a parameter of the synth engine
     enum class Parameter {
         StringPitch,
@@ -45,7 +45,9 @@ private:
         FeedbackHPFCutoff,
         EchoDelayTime,
         EchoDelayFeedback,
-        EchoDelaySend
+        EchoDelaySend,
+        ReverbMix,
+        ReverbTime
     };
 
     using Parameters = ParameterRegistry<Parameter>;

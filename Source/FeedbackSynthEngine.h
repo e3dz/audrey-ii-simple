@@ -35,6 +35,10 @@ class Engine {
         void SetEchoDelayFeedback(const float echo_fb);
         void SetEchoDelaySendAmount(const float echo_send);
 
+        // Both range 0-1
+        void SetReverbMix(const float mix);
+        void SetReverbTime(const float time);
+
         void Process(float in, float &outL, float &outR);
 
     private:
@@ -46,6 +50,7 @@ class Engine {
         float sample_rate_;
         float fb_gain_ = 0.0f;
         float echo_send_ = 0.0f;
+        float verb_mix_ = 0.0f;
 
         float fb_delay_smooth_coef_;
         float fb_delay_samp_ = 1000.f;
@@ -58,6 +63,9 @@ class Engine {
 
         LPF12 fb_lpf_;
         HPF12 fb_hpf_;
+
+        using VerbPtr = std::unique_ptr<daisysp::ReverbSc>;
+        VerbPtr verb_;
 
         using EchoDelayPtr = std::unique_ptr<EchoDelay<kMaxEchoDelaySamp>>;
         EchoDelayPtr echo_delay_[2];

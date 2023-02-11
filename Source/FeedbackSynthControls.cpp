@@ -2,15 +2,23 @@
 #include <functional>
 
 using namespace infrasonic;
+using namespace infrasonic::FeedbackSynth;
 using namespace daisy;
 
-void FeedbackSynth::Controls::Init(DaisySeed &hw, Engine &engine) {
+constexpr Pin FeedbackSynth::Controls::kPotAdcPin1;
+constexpr Pin FeedbackSynth::Controls::kPotAdcPin2;
+constexpr Pin FeedbackSynth::Controls::kMuxAdcPin;
+constexpr Pin FeedbackSynth::Controls::kMuxAddrPin0;
+constexpr Pin FeedbackSynth::Controls::kMuxAddrPin1;
+constexpr Pin FeedbackSynth::Controls::kMuxAddrPin2;
+
+void Controls::Init(DaisySeed &hw, Engine &engine) {
     params_.Init(hw.AudioSampleRate() / hw.AudioBlockSize());
     initADCs(hw);
     registerParams(engine);
 }
 
-void FeedbackSynth::Controls::Update(DaisySeed &hw) {
+void Controls::Update(DaisySeed &hw) {
     params_.UpdateNormalized(Parameter::StringPitch,        1.0f - hw.adc.GetMuxFloat(0, 0));
     params_.UpdateNormalized(Parameter::FeedbackGain,       1.0f - hw.adc.GetMuxFloat(0, 1));
     params_.UpdateNormalized(Parameter::FeedbackDelay,      1.0f - hw.adc.GetMuxFloat(0, 2));
@@ -19,19 +27,24 @@ void FeedbackSynth::Controls::Update(DaisySeed &hw) {
     params_.UpdateNormalized(Parameter::EchoDelayTime,      1.0f - hw.adc.GetMuxFloat(0, 5));
     params_.UpdateNormalized(Parameter::EchoDelayFeedback,  1.0f - hw.adc.GetMuxFloat(0, 6));
     params_.UpdateNormalized(Parameter::EchoDelaySend,      1.0f - hw.adc.GetMuxFloat(0, 7));
+
+    params_.UpdateNormalized(Parameter::ReverbTime,         1.0f - hw.adc.GetFloat(1));
+    params_.UpdateNormalized(Parameter::ReverbMix,          1.0f - hw.adc.GetFloat(2));
 }
 
-void FeedbackSynth::Controls::initADCs(DaisySeed &hw) {
+void Controls::initADCs(DaisySeed &hw) {
     AdcChannelConfig config[kNumAdcChannels];
 
     // First channel = multiplexed 8x
-    config[0].InitMux(hw.GetPin(ADC_CH0), 8, hw.GetPin(MUX0_ADR0), hw.GetPin(MUX0_ADR1), hw.GetPin(MUX0_ADR2));
+    config[0].InitMux(kMuxAdcPin, 8, kMuxAddrPin0, kMuxAddrPin1, kMuxAddrPin2);
+    config[1].InitSingle(kPotAdcPin1);
+    config[2].InitSingle(kPotAdcPin2);
 
     hw.adc.Init(config, kNumAdcChannels);
     hw.adc.Start();
 }
 
-void FeedbackSynth::Controls::registerParams(Engine &engine) {
+void Controls::registerParams(Engine &engine) {
     using namespace std::placeholders;
 
     // Pitch as nn
@@ -55,4 +68,10 @@ void FeedbackSynth::Controls::registerParams(Engine &engine) {
 
     // Echo Delay send
     params_.Register(Parameter::EchoDelaySend, 0.0f, 0.0f, 1.0f, std::bind(&Engine::SetEchoDelaySendAmount, &engine, _1), 0.05f, daisysp::Mapping::EXP);
+
+    // Reverb Mix
+    params_.Register(Parameter::ReverbMix, 0.0f, 0.0f, 1.0f, std::bind(&Engine::SetReverbMix, &engine, _1));
+
+    // Reverb Tiem
+    params_.Register(Parameter::ReverbTime, 0.0f, 0.0f, 1.0f, std::bind(&Engine::SetReverbTime, &engine, _1));
 }

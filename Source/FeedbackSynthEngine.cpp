@@ -15,9 +15,11 @@ void Engine::Init(const float sample_rate)
     #ifdef TARGET_DAISY
     echo_delay_[0] = EchoDelayPtr(SDRAM::allocate<ED>());
     echo_delay_[1] = EchoDelayPtr(SDRAM::allocate<ED>());
+    verb_          = VerbPtr(SDRAM::allocate<ReverbSc>());
     #else
     echo_delay_[0] = std::make_unique<ED>();
     echo_delay_[1] = std::make_unique<ED>();
+    verb_          = std::make_unique<ReverbSc>();
     #endif
 
     sample_rate_ = sample_rate;
@@ -43,6 +45,10 @@ void Engine::Init(const float sample_rate)
         overdrive_[i].Init();
         overdrive_[i].SetDrive(0.4);
     }
+
+    verb_->Init(sample_rate);
+    verb_->SetFeedback(0.85f);
+    verb_->SetLpFreq(12000.0f);
 
     fb_lpf_.Init(sample_rate);
     fb_lpf_.SetQ(0.9f);
@@ -97,6 +103,16 @@ void Engine::SetEchoDelaySendAmount(const float echo_send)
     echo_send_ = echo_send;
 }
 
+void Engine::SetReverbMix(const float mix)
+{
+    verb_mix_ = fclamp(mix, 0.0f, 1.0f);
+}
+
+void Engine::SetReverbTime(const float time)
+{
+    verb_->SetFeedback(time);
+}
+
 void Engine::Process(float in, float &outL, float &outR)
 {
     // --- Update audio-rate-smoothed control params ---
@@ -105,7 +121,7 @@ void Engine::Process(float in, float &outL, float &outR)
 
     // --- Process Samples ---
 
-    float inL, inR, sampL, sampR, echoL, echoR;
+    float inL, inR, sampL, sampR, echoL, echoR, verbL, verbR;
     const float noise_samp = noise_.Process();
 
     // ---> Feedback Loop
@@ -119,9 +135,6 @@ void Engine::Process(float in, float &outL, float &outR)
     sampR = strings_[1].Process(inR);
 
     // Distort + Clip
-    // TODO: Oversample this? Another distortion algo maybe?
-    // sampL = SoftClip(sampL * 8.0f);
-    // sampR = SoftClip(sampR * 8.0f);
     sampL = overdrive_[0].Process(sampL);
     sampR = overdrive_[1].Process(sampR);
 
@@ -129,21 +142,33 @@ void Engine::Process(float in, float &outL, float &outR)
     fb_lpf_.ProcessStereo(sampL, sampR);
     fb_hpf_.ProcessStereo(sampL, sampR);
 
-    // TODO: Allpass
+    // ---> Reverb
+
+    verb_->Process(sampL, sampR, &verbL, &verbR);
+
+    //       (sampL * (1.0f - verb_mix_)) + verbL * verb_mix_;
+    //       sampL - sampL * verb_mix + verbL * verb_mix_;
+    sampL -= (sampL - verbL) * verb_mix_;
+    sampR -= (sampR - verbR) * verb_mix_;
+
+    // ---> Resonator feedback
 
     // Write back into delay with attenuation
     fb_delayline_[0].Write(sampL * fb_gain_);
     fb_delayline_[1].Write(sampR * fb_gain_);
 
-    // ---> Output
+    // ---> Echo Delay
 
     echoL = echo_delay_[0]->Process(sampL * echo_send_);
     echoR = echo_delay_[1]->Process(sampR * echo_send_);
 
     sampL = 0.5f * (sampL + echoL);
-    sampR = 0.5f * (sampR + echoR);;
+    sampR = 0.5f * (sampR + echoR);
 
-    // TODO: Out level
+
+    // ---> Output
+
+    // TODO: Out level?
     outL = sampL * 0.5f;
     outR = sampR * 0.5f;
 }
