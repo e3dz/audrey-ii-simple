@@ -37,7 +37,7 @@ class Engine {
 
         // Both range 0-1
         void SetReverbMix(const float mix);
-        void SetReverbTime(const float time);
+        void SetReverbFeedback(const float time);
 
         void Process(float in, float &outL, float &outR);
 

@@ -29,6 +29,13 @@ inline float onepole_coef_t60(float time_s, float sample_rate)
 	return onepole_coef(time_s * 0.1447597f, sample_rate);
 }
 
+inline float ftension(const float in, const float factor)
+{
+    if (factor == 0.0f) return in;
+    const float denom = expm1f(factor);
+    return expm1f(in * factor) / denom;
+}
+
 inline float tanf(const float x)
 {
 #ifdef __arm__

@@ -47,7 +47,7 @@ private:
         EchoDelayFeedback,
         EchoDelaySend,
         ReverbMix,
-        ReverbTime
+        ReverbFeedback
     };
 
     using Parameters = ParameterRegistry<Parameter>;

@@ -108,7 +108,7 @@ void Engine::SetReverbMix(const float mix)
     verb_mix_ = fclamp(mix, 0.0f, 1.0f);
 }
 
-void Engine::SetReverbTime(const float time)
+void Engine::SetReverbFeedback(const float time)
 {
     verb_->SetFeedback(time);
 }

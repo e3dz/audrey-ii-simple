@@ -28,7 +28,8 @@ void Controls::Update(DaisySeed &hw) {
     params_.UpdateNormalized(Parameter::EchoDelayFeedback,  1.0f - hw.adc.GetMuxFloat(0, 6));
     params_.UpdateNormalized(Parameter::EchoDelaySend,      1.0f - hw.adc.GetMuxFloat(0, 7));
 
-    params_.UpdateNormalized(Parameter::ReverbTime,         1.0f - hw.adc.GetFloat(1));
+    float reverb_fb_raw = 1.0f - hw.adc.GetFloat(1);
+    params_.UpdateNormalized(Parameter::ReverbFeedback,     ftension(reverb_fb_raw, -3.0f));
     params_.UpdateNormalized(Parameter::ReverbMix,          1.0f - hw.adc.GetFloat(2));
 }
 
@@ -72,6 +73,6 @@ void Controls::registerParams(Engine &engine) {
     // Reverb Mix
     params_.Register(Parameter::ReverbMix, 0.0f, 0.0f, 1.0f, std::bind(&Engine::SetReverbMix, &engine, _1));
 
-    // Reverb Tiem
-    params_.Register(Parameter::ReverbTime, 0.0f, 0.0f, 1.0f, std::bind(&Engine::SetReverbTime, &engine, _1));
+    // Reverb Feedback (input is mapped to anti-exponential)
+    params_.Register(Parameter::ReverbFeedback, 0.2f, 0.2f, 1.0f, std::bind(&Engine::SetReverbFeedback, &engine, _1));
 }
