@@ -26,7 +26,7 @@ inline float onepole_coef(float time_s, float sample_rate) {
 
 inline float onepole_coef_t60(float time_s, float sample_rate)
 {
-	return onepole_coef(time_s * 6.91f, sample_rate);
+	return onepole_coef(time_s * 0.1447597f, sample_rate);
 }
 
 inline float tanf(const float x)
