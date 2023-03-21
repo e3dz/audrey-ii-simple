@@ -2,6 +2,8 @@
 #ifndef INFS_FEEDBACKSYNTHCONTROLS_H
 #define INFS_FEEDBACKSYNTHCONTROLS_H
 
+
+
 #include <daisy.h>
 #include <daisy_seed.h>
 #include "FeedbackSynthEngine.h"
@@ -27,27 +29,22 @@ public:
 
 private:
 
-    static const     size_t     kNumAdcChannels = 3;
-
-    static constexpr daisy::Pin kPotAdcPin1     = daisy::seed::A1;
-    static constexpr daisy::Pin kPotAdcPin2     = daisy::seed::A2;
-    static constexpr daisy::Pin kMuxAdcPin      = daisy::seed::A0;
-    static constexpr daisy::Pin kMuxAddrPin0    = daisy::seed::D1;
-    static constexpr daisy::Pin kMuxAddrPin1    = daisy::seed::D2;
-    static constexpr daisy::Pin kMuxAddrPin2    = daisy::seed::D3;
+    static const size_t kNumAdcChannels = 11;
 
     /// Identifies a parameter of the synth engine
-    enum class Parameter {
-        StringPitch,
-        FeedbackGain,
-        FeedbackDelay,
-        FeedbackLPFCutoff,
-        FeedbackHPFCutoff,
-        EchoDelayTime,
-        EchoDelayFeedback,
-        EchoDelaySend,
-        ReverbMix,
-        ReverbFeedback
+    /// The order here is the same order as the ADC pin configs in the cpp file
+    enum class Parameter : uint8_t {
+        Frequency           = 0,
+        FeedbackGain,       // 1
+        FeedbackBody,       // 2
+        FeedbackLPFCutoff,  // 3
+        FeedbackHPFCutoff,  // 4
+        ReverbMix,          // 5
+        ReverbDecay,        // 6
+        EchoDelaySend,      // 7
+        EchoDelayTime,      // 8
+        EchoDelayFeedback,  // 9
+        OutputVolume        // 10
     };
 
     using Parameters = ParameterRegistry<Parameter>;
