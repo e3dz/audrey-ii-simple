@@ -39,6 +39,8 @@ class Engine {
         void SetReverbMix(const float mix);
         void SetReverbFeedback(const float time);
 
+        void SetOutputLevel(const float level);
+
         void Process(float in, float &outL, float &outR);
 
     private:
@@ -51,6 +53,7 @@ class Engine {
         float fb_gain_ = 0.0f;
         float echo_send_ = 0.0f;
         float verb_mix_ = 0.0f;
+        float output_level_ = 0.5f;
 
         float fb_delay_smooth_coef_;
         float fb_delay_samp_ = 1000.f;

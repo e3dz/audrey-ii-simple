@@ -113,6 +113,11 @@ void Engine::SetReverbFeedback(const float time)
     verb_->SetFeedback(time);
 }
 
+void Engine::SetOutputLevel(const float level)
+{
+    output_level_ = level;
+}
+
 void Engine::Process(float in, float &outL, float &outR)
 {
     // --- Update audio-rate-smoothed control params ---
@@ -165,10 +170,7 @@ void Engine::Process(float in, float &outL, float &outR)
     sampL = 0.5f * (sampL + echoL);
     sampR = 0.5f * (sampR + echoR);
 
-
     // ---> Output
-
-    // TODO: Out level?
-    outL = sampL * 0.5f;
-    outR = sampR * 0.5f;
+    outL = sampL * output_level_;
+    outR = sampR * output_level_;
 }
