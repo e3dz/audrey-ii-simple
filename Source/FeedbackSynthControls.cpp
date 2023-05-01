@@ -41,9 +41,17 @@ static constexpr daisy::Pin kEchoSendKnobAdcPin         = daisy::seed::A1;  // S
 static constexpr daisy::Pin kEchoTimeKnobAdcPin         = daisy::seed::A0;  // Simple bottom pin 30
 static constexpr daisy::Pin kEchoFeedbackKnobAdcPin     = daisy::seed::A3;  // Simple bottom pin 33
 static constexpr daisy::Pin kOutputVolumeAdcPin         = daisy::seed::A2;  // Simple bottom pin 32
+static constexpr daisy::Pin kDelaySwitchPin             = daisy::seed::D14; // Simple bottom pin 15
 
 void Controls::Init(DaisySeed &hw, Engine &engine) {
     params_.Init(hw.AudioSampleRate() / hw.AudioBlockSize());
+    del_sw_.Init(
+        static_cast<dsy_gpio_pin>(kDelaySwitchPin),
+        1000.0f,
+        Switch::TYPE_TOGGLE,
+        Switch::POLARITY_INVERTED,
+        Switch::PULL_UP
+    );
     initADCs(hw);
     registerParams(engine);
 }
@@ -54,11 +62,15 @@ void Controls::Update(DaisySeed &hw) {
     params_.UpdateNormalized(Parameter::FeedbackBody,       1.0f - hw.adc.GetFloat(2));
     params_.UpdateNormalized(Parameter::FeedbackLPFCutoff,  1.0f - hw.adc.GetFloat(3));
     params_.UpdateNormalized(Parameter::FeedbackHPFCutoff,  1.0f - hw.adc.GetFloat(4));
-    // Special mapping for reverb feedback/decay (anti-exponential tension curve)
     params_.UpdateNormalized(Parameter::ReverbMix,          1.0f - hw.adc.GetFloat(5));
+    // Special mapping for reverb feedback/decay (anti-exponential tension curve)
     params_.UpdateNormalized(Parameter::ReverbDecay,        ftension(1.0f - hw.adc.GetFloat(6), -3.0f));
     params_.UpdateNormalized(Parameter::EchoDelaySend,      1.0f - hw.adc.GetFloat(7));
-    params_.UpdateNormalized(Parameter::EchoDelayTime,      1.0f - hw.adc.GetFloat(8));
+    // Delay switch doubles or halves delay time instantly for doppler warp
+    del_sw_.Debounce();
+    float delay_norm = 1.0f - hw.adc.GetFloat(8);
+    float delay_scale = del_sw_.Pressed() ? 0.5f : 1.0f;
+    params_.UpdateNormalized(Parameter::EchoDelayTime, delay_norm * delay_scale);
     params_.UpdateNormalized(Parameter::EchoDelayFeedback,  1.0f - hw.adc.GetFloat(9));
     params_.UpdateNormalized(Parameter::OutputVolume,       1.0f - hw.adc.GetFloat(10));
 }

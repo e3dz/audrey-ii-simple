@@ -50,6 +50,7 @@ private:
     using Parameters = ParameterRegistry<Parameter>;
 
     Parameters params_;
+    daisy::Switch del_sw_;
 
     void initADCs(daisy::DaisySeed &hw);
     void registerParams(Engine &engine);
