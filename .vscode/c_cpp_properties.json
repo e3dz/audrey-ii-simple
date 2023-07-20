@@ -1,22 +1,7 @@
 {
     "configurations": [
         {
-            "name": "Mac",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ] ,
-            "compilerPath": "/usr/bin/g++",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "macos-gcc-x64"
-        },
-        {
-            "name": "Daisy",
+            "name": "Daisy-Mac",
             "includePath": [
                 "${workspaceFolder}/**"
             ],

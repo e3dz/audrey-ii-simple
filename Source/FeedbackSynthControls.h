@@ -2,8 +2,6 @@
 #ifndef INFS_FEEDBACKSYNTHCONTROLS_H
 #define INFS_FEEDBACKSYNTHCONTROLS_H
 
-
-
 #include <daisy.h>
 #include <daisy_seed.h>
 #include "FeedbackSynthEngine.h"
@@ -55,7 +53,6 @@ private:
     void initADCs(daisy::DaisySeed &hw);
     void registerParams(Engine &engine);
 };
-
 
 }
 }
