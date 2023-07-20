@@ -1,9 +1,6 @@
 #include "FeedbackSynthEngine.h"
 #include "DSPUtils.h"
-
-#ifdef TARGET_DAISY
 #include "memory/sdram_alloc.h"
-#endif
 
 using namespace infrasonic;
 using namespace infrasonic::FeedbackSynth;
