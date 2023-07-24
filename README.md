@@ -34,6 +34,9 @@ Finally, the output of this section goes through a tape-like delay with a fairly
 maximum delay time and a feedback control designed to deliberately produce infinitely
 growing/saturating feedback, for creative distorted warping and warbling possibilities.
 
+## Simple Kit Build Guide
+
+### [🛠️ Build Guide](https://github.com/infrasonicaudio/audrey-ii-simple/wiki/Building-the-Audrey-II-Simple-Kit)
 
 ## Flashing the Daisy Seed
 
