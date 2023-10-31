@@ -1,8 +1,8 @@
 # Project Name
 TARGET = FeedbackSynth
 
-LIBDAISY_DIR = lib/libDaisy
-DAISYSP_DIR = lib/DaisySP
+LIBDAISY_DIR = ../DaisyExamples/libDaisy/
+DAISYSP_DIR = ../DaisyExamples/DaisySP/
 CMSIS_DSP_SRC_DIR = ${LIBDAISY_DIR}/Drivers/CMSIS/DSP/Source
 
 C_DEFS = -DTARGET_DAISY

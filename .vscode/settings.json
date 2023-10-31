@@ -92,5 +92,12 @@
         "arm_common_tables.h": "c",
         "ranges": "cpp",
         "fstream": "cpp"
-    }
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "c:\\Users\\45275\\Documents\\modular\\audrey-ii-simple\\build",
+            "binaryPath": "c:\\Users\\45275\\Documents\\modular\\audrey-ii-simple\\build\\FeedbackSynth.elf",
+            "binaryArgs": []
+        }
+    ]
 }

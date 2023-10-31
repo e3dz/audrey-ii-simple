@@ -1,0 +1,59 @@
+10-31 22:16:23 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 326:Plugin executed on: 'win32'
+10-31 22:16:23 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 327:Plugin executed with python version: '3.9.14 (main, Dec 23 2022, 23:36:19) [MSC v.1934 64 bit (AMD64)]'
+10-31 22:16:23 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 328:KiCad build version: (7.0.0)
+10-31 22:16:23 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 329:Plugin version: 2.0.1
+10-31 22:16:23 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 330:Frame repr: <wx._core.Frame object at 0x00000212056C1EE0>
+10-31 22:16:23 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 354:Preparing replicator with U2 as a reference
+10-31 22:16:23 com_github_MitjaNemec_ReplicateLayout.replicate_layout 110:getting a list of all footprints on board
+10-31 22:16:23 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 402:source anchor footprint is 'U2'
+Located on: ['ADCBufferIn']
+With filenames: ['ADCBufferIn.kicad_sch']
+With sheet_id:['ADCBufferIn']
+10-31 22:16:23 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 409:Corresponding footprints are 
+[('U4', ['ADCBufferIn2']), ('U3', ['ADCBufferIn1']), ('U2', ['ADCBufferIn'])]
+10-31 22:16:23 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 421:Showing dialog
+10-31 22:16:23 com_github_MitjaNemec_ReplicateLayout.replicate_layout 358:constructing a list of sheets suitable for replication on level:'ADCBufferIn', file:'ADCBufferIn.kicad_sch'
+10-31 22:16:23 com_github_MitjaNemec_ReplicateLayout.replicate_layout 395:suitable sheets are:[['ADCBufferIn1'], ['ADCBufferIn2']]
+10-31 22:16:24 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1318:Level selected: ['ADCBufferIn']
+10-31 22:16:24 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1153:Filtering list of tracks
+10-31 22:16:24 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 427:Toolbar position: wx.Point(925, 88)
+10-31 22:16:24 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 432:Dialog position: wx.Point(561, 88)
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 358:constructing a list of sheets suitable for replication on level:'ADCBufferIn', file:'ADCBufferIn.kicad_sch'
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 395:suitable sheets are:[['ADCBufferIn1'], ['ADCBufferIn2']]
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 188:Replicating layout
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 204:Starting replication of sheets: [['ADCBufferIn1'], ['ADCBufferIn2']]
+on level: ['ADCBufferIn']
+with tracks=True, zone=True, text=True, text=True, intersecting=False, remove=False, locked footprints=False, group_only=False
+10-31 22:16:25 root 266:updating GUI message: 'Preparing for replication'
+10-31 22:16:25 root 271:updating GUI with: 0
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 274:Getting the list of source footprints
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 284:Getting the list of all the remaining footprints
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 291:Getting source tracks
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1153:Filtering list of tracks
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 295:Getting source zones
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 299:Getting source text items
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 303:Getting source drawing items
+10-31 22:16:25 root 266:updating GUI message: 'Replicating footprints'
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 709:Replicating footprints
+10-31 22:16:25 root 271:updating GUI with: 0
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 715:Replicating footprints on sheet ['ADCBufferIn1']
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 715:Replicating footprints on sheet ['ADCBufferIn2']
+10-31 22:16:25 root 271:updating GUI with: 83
+10-31 22:16:25 root 266:updating GUI message: 'Replicating tracks'
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 875:Replicating tracks
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 881:Replicating tracks on sheet ['ADCBufferIn1']
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 881:Replicating tracks on sheet ['ADCBufferIn2']
+10-31 22:16:25 root 266:updating GUI message: 'Replicating zones'
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 933:Replicating zones
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 940:Replicating zones on sheet ['ADCBufferIn1']
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 940:Replicating zones on sheet ['ADCBufferIn2']
+10-31 22:16:25 root 266:updating GUI message: 'Replicating text'
+10-31 22:16:25 root 271:updating GUI with: 0
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1011:Replicating text
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1018:Replicating text on sheet ['ADCBufferIn1']
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1018:Replicating text on sheet ['ADCBufferIn2']
+10-31 22:16:25 root 266:updating GUI message: 'Replicating drawings'
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1051:Replicating drawings
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1057:Replicating drawings on sheet ['ADCBufferIn1']
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1057:Replicating drawings on sheet ['ADCBufferIn2']
+10-31 22:16:25 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 204:Replication complete

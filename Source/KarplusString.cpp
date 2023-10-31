@@ -26,7 +26,8 @@ void KarplusString::Reset()
 {
     string_.Reset();
     iir_damping_filter_.Init(sample_rate_);
-    iir_damping_filter_.SetFreq(8000.0f);
+    float freq = 8000.0f;
+    iir_damping_filter_.SetFreq(freq);
 
     dc_blocker_.Init(sample_rate_);
 
