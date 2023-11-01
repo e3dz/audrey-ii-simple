@@ -1,6 +1,6 @@
 (kicad_sch (version 20230121) (generator eeschema)
 
-  (uuid 96cfafb8-8d04-43de-ba19-5d52028c0022)
+  (uuid 93bc71ca-760d-41f8-965e-6a5686ffc635)
 
   (paper "A4")
 
@@ -240,6 +240,9 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 151.13 85.09 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC#" "C21190" (at 151.13 85.09 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 542459c1-c438-42b6-a4fd-32aa054514f2))

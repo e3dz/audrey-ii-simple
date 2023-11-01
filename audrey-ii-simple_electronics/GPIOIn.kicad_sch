@@ -1,6 +1,6 @@
 (kicad_sch (version 20230121) (generator eeschema)
 
-  (uuid 28387508-bfb2-4b15-8e7e-e537f7a3d337)
+  (uuid 9eebee29-472a-4adf-a866-87e858cab5d7)
 
   (paper "A4")
 
@@ -425,6 +425,9 @@
     (property "Datasheet" "~" (at 130.81 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "LCSC#" "C25804" (at 130.81 80.01 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 734f3e5a-281a-494c-a677-fd1eb280b23f))
     (pin "2" (uuid d5d473b4-6670-46c2-bed7-ad992e15d94c))
     (instances
@@ -449,6 +452,9 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 140.97 86.36 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC#" "C21190" (at 140.97 86.36 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 71a5e76d-c7af-47a5-8682-a76fd8c7079c))
@@ -477,6 +483,9 @@
     (property "Datasheet" "~" (at 114.3 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "LCSC#" "C25803" (at 114.3 95.25 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 526907e1-2310-4aaf-a044-3c0debd91817))
     (pin "2" (uuid 51893140-70a4-4f03-b7a3-61da100b4cc6))
     (instances
@@ -501,6 +510,9 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 120.65 105.41 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC#" "C136593" (at 120.65 105.41 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 233d9379-8ccb-48eb-a17e-b4d7124382d5))
@@ -567,6 +579,9 @@
     )
     (property "Datasheet" "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF" (at 128.27 95.25 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
+    )
+    (property "LCSC#" "C20526" (at 128.27 95.25 0)
+      (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 5fcf410b-bf85-4819-9b77-c73132a97938))
     (pin "2" (uuid fcce5578-983c-4ca0-a4b9-ff144cb48dca))

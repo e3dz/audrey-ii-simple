@@ -3,3 +3,7 @@
 **/__pycache__
 **/build
 .vscode/*.log
+audrey-ii-simple_electronics/fp-info-cache
+*.zip
+audrey-ii-simple_electronics/\#auto_saved_files\#
+audrey-ii-simple_electronics/\#auto_saved_files\#
