@@ -1173,8 +1173,8 @@
     (property "LCSC#" "C701887" (at 50.8 171.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid b008c4e3-796b-4c0c-a1fb-cecc3a733c57))
     (pin "1" (uuid d9af28fd-b235-4123-ad96-5e6d5992d66a))
+    (pin "2" (uuid b008c4e3-796b-4c0c-a1fb-cecc3a733c57))
     (instances
       (project "audrey-ii-simple_electronics"
         (path "/655d86ff-20fd-40aa-a4fb-11d32a0c01aa/55ab1e09-7d68-4f82-8f09-81a0b40ab798"

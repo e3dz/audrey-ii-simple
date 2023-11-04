@@ -346,7 +346,7 @@
     (property "Value" "SW_SPDT" (at 138.43 93.7801 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 138.43 97.79 0)
+    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" (at 138.43 97.79 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 138.43 97.79 0)
